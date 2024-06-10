@@ -24,6 +24,8 @@ class VerifyUserCommand extends Command
         $this->handler = $handler;
     }
 
+
+
     protected function configure(): void
     {
         $this
@@ -33,7 +35,7 @@ class VerifyUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $userId = (int) $input->getArgument('id');
+        $userId =  $input->getArgument('id');
 
         $command = new VerifyUserAppCommand($userId);
 

@@ -1,9 +1,8 @@
 <?php
+namespace App\Infrastructure\Command;
 
-namespace App\Command;
-
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Infrastructure\Command\VerifyUserCommand as VerifyUserAppCommand;
+use App\Application\Handler\VerifyUserHandler;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,15 +16,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class VerifyUserCommand extends Command
 {
-    private $userRepository;
-    private $entityManager;
+    private VerifyUserHandler $handler;
 
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager)
+    public function __construct(VerifyUserHandler $handler)
     {
         parent::__construct();
-
-        $this->userRepository = $userRepository;
-        $this->entityManager = $entityManager;
+        $this->handler = $handler;
     }
 
     protected function configure(): void
@@ -37,20 +33,17 @@ class VerifyUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $userId = $input->getArgument('id');
+        $userId = (int) $input->getArgument('id');
 
-        $user = $this->userRepository->find($userId);
+        $command = new VerifyUserAppCommand($userId);
 
-        if (!$user) {
-            $io->error(sprintf('User with ID %d not found.', $userId));
+        try {
+            $this->handler->handle($command);
+            $io->success(sprintf('User with ID %d has been verified.', $userId));
+            return Command::SUCCESS;
+        } catch (\Exception $e) {
+            $io->error($e->getMessage());
             return Command::FAILURE;
         }
-
-        $user->setVerified(true);
-        $this->entityManager->flush();
-
-        $io->success(sprintf('User with ID %d has been verified.', $userId));
-
-        return Command::SUCCESS;
     }
 }

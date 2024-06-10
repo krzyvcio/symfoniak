@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-use App\Repository\UserRepository;
+use App\Domain\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;

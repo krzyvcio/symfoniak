@@ -10,3 +10,7 @@ app_login:
 
 app_logout:
   path: /logout
+
+task_add:
+  path: /task/add
+  controller: App\Presentation\Controller\TaskController::addTask

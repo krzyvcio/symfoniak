@@ -40,6 +40,8 @@ services:
   App\Application\EventListener\UserRegisteredListener:
     tags:
       - { name: kernel.event_subscriber }
+  App\Presentation\Controller\TaskController:
+    tags: ['controller.service_arguments']
 
   #  App\Domain\Repository\TaskRepositoryInterface: '@App\Infrastructure\Repository\TaskRepository'
 

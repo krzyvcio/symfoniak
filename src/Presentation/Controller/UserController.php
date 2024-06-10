@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Presentation\Controller;
 
 use App\Application\Service\UserService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UserController extends AbstractController
+class UserController extends BaseController
 {
     private $userService;
 

@@ -1,35 +1,44 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}Welcome!
-			{% endblock %}
-		</title>
-		<link rel="stylesheet" href="{{ asset('build/app.css') }}">
-	</head>
-	<body>
-		<nav>
-			<ul>
-				<li>
-					home
-					{# <a href="{{ path('app_home') }}">Home</a> #}
-				</li>
-				{% if app.user %}
-					<li>
-						<a href="{{ path('app_dashboard') }}">Dashboard</a>
-					</li>
-					<li>
-						<a href="{{ path('app_logout') }}">Logout</a>
-					</li>
-				{% else %}
-					<li>
-						<a href="{{ path('app_login') }}">Login</a>
-					</li>
-				{% endif %}
-			</ul>
-		</nav>
+<head>
+	<meta charset="UTF-8">
+	<title>
+		{% block title %}Welcome!{% endblock %}
+	</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+	<link rel="stylesheet" href="{{ asset('build/app.css') }}">
+</head>
+<body>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+	<div class="navbar-brand">
+		<a class="navbar-item" href="#">
+			Home
+			{# <a href="{{ path('app_home') }}">Home</a> #}
+		</a>
+	</div>
 
+	<div class="navbar-menu">
+		<div class="navbar-start">
+			{% if app.user %}
+				<a class="navbar-item" href="{{ path('app_dashboard') }}">
+					Dashboard
+				</a>
+				<a class="navbar-item" href="{{ path('app_logout') }}">
+					Logout
+				</a>
+			{% else %}
+				<a class="navbar-item" href="{{ path('app_login') }}">
+					Login
+				</a>
+			{% endif %}
+		</div>
+	</div>
+</nav>
+
+<section class="section">
+	<div class="container">
 		{% block body %}{% endblock %}
-	</body>
+	</div>
+</section>
+</body>
 </html>

@@ -26,3 +26,4 @@ framework:
       # Route your messages to the transports
       # 'App\Message\YourMessage': async
       App\Application\Message\SendEmailMessage: async
+      App\Application\Command\AddTaskCommand: async

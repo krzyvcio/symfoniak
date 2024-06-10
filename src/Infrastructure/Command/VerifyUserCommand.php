@@ -1,5 +1,5 @@
 <?php
-// src/Infrastructure/Command/VerifyUserCommand.php
+declare(strict_types=1);
 namespace App\Infrastructure\Command;
 
 use App\Application\Command\VerifyUserCommand as VerifyUserAppCommand;

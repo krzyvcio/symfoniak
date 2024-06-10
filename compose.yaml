@@ -3,7 +3,7 @@ version: '3.8'
 services:
   database:
     image: mariadb:latest
-    container_name: mariadb
+    container_name: symfoniak_mariadb
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: symfony
@@ -13,3 +13,9 @@ services:
       - ./mariadb-data:/var/lib/mysql
     ports:
       - "3306:3306"
+
+  redis:
+    image: redis:latest
+    container_name: symfoniak_redis
+    ports:
+      - "6379:6379"

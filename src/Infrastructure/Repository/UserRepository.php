@@ -5,16 +5,19 @@ namespace App\Infrastructure\Repository;
 use App\Domain\Entity\User;
 use App\Domain\Repository\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, User::class);
+        $this->entityManager = $entityManager;
     }
 
-    // Ensure the method signature matches the parent class
     public function find($id, $lockMode = null, $lockVersion = null): ?User
     {
         return parent::find($id, $lockMode, $lockVersion);
@@ -22,13 +25,14 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
 
     public function save(User $user): void
     {
-        $this->_em->persist($user);
-        $this->_em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 
     public function remove(User $user): void
     {
-        $this->_em->remove($user);
-        $this->_em->flush();
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
     }
 }
+

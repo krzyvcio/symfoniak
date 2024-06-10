@@ -23,7 +23,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
 
-
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
@@ -35,6 +34,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private bool $is_veryfied = false;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lastName = null;
 
     public function getPassword(): ?string
     {
@@ -56,6 +61,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->email;
+    }
+
+    public function getUser(): User
+    {
+        return $this;
     }
 
     public function getId(): ?int
@@ -91,5 +101,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(?string $password): void
     {
         $this->password = $password;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): self
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): self
+    {
+        $this->lastName = $lastName;
+        return $this;
     }
 }

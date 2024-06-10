@@ -1,7 +1,8 @@
 <?php
+// src/Infrastructure/Command/VerifyUserCommand.php
 namespace App\Infrastructure\Command;
 
-use App\Infrastructure\Command\VerifyUserCommand as VerifyUserAppCommand;
+use App\Application\Command\VerifyUserCommand as VerifyUserAppCommand;
 use App\Application\Handler\VerifyUserHandler;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -24,8 +25,6 @@ class VerifyUserCommand extends Command
         $this->handler = $handler;
     }
 
-
-
     protected function configure(): void
     {
         $this
@@ -35,7 +34,7 @@ class VerifyUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $userId =  $input->getArgument('id');
+        $userId = (int) $input->getArgument('id');
 
         $command = new VerifyUserAppCommand($userId);
 

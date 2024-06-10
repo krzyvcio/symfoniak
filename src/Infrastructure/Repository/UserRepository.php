@@ -2,7 +2,7 @@
 // src/Infrastructure/Repository/UserRepository.php
 namespace App\Infrastructure\Repository;
 
-use App\Domain\Model\User;
+use App\Domain\Entity\User;
 use App\Domain\Repository\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;

@@ -22,8 +22,12 @@ services:
 
   App\Domain\Repository\UserRepositoryInterface: '@App\Infrastructure\Repository\UserRepository'
   App\Domain\Service\UserServiceInterface: '@App\Application\Service\UserService'
+  App\Application\Handler\VerifyUserHandler:
+    arguments:
+      $userRepository: '@App\Domain\Repository\UserRepositoryInterface'
+      $entityManager: '@doctrine.orm.default_entity_manager'
 
-#  App\Domain\Repository\TaskRepositoryInterface: '@App\Infrastructure\Repository\TaskRepository'
+  #  App\Domain\Repository\TaskRepositoryInterface: '@App\Infrastructure\Repository\TaskRepository'
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\Model;
-// src/Domain/Model/User.php
-namespace App\Domain\Model;
+namespace App\Domain\Entity;
 
+use App\Domain\Model\Timestampable;
+use App\Infrastructure\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -88,6 +88,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->is_veryfied = $is_veryfied;
     }
 
-
-
+    public function setPassword(?string $password): void
+    {
+        $this->password = $password;
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace App\Application\Handler;
 
-use App\Infrastructure\Command\VerifyUserCommand;
+use App\Application\Command\VerifyUserCommand;
 use App\Domain\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -24,7 +24,8 @@ class VerifyUserHandler
             throw new \Exception(sprintf('User with ID %d not found.', $command->getUserId()));
         }
 
-        $user->setVerified(true);
+        $user->setIsVeryfied(true);
         $this->entityManager->flush();
     }
 }
+
